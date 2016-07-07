@@ -51,7 +51,7 @@
 	var ReactDOM = __webpack_require__(158);
 
 	// Include the Main Component
-	var Calendar = __webpack_require__(531);
+	var Calendar = __webpack_require__(159);
 
 	// This code here allows us to render our main component (in this case "Parent")
 	ReactDOM.render(React.createElement(Calendar, null), document.getElementById('app'));
@@ -19670,7 +19670,233 @@
 
 
 /***/ },
-/* 159 */,
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	// Include React
+	var React = __webpack_require__(1);
+	var ReactDOM = __webpack_require__(158);
+
+	// Here we include all of the sub-components
+	//var Child = require('./Child');
+
+	// This is the main component. It includes the banner and button.
+	// Whenever you click the button it will communicate the click event to all other sub components.
+	var DatePicker = __webpack_require__(160);
+	var moment = __webpack_require__(161);
+	var ReactBootstrap = __webpack_require__(266);
+	//require('../../public/react-datepicker.css');
+	var ButtonToolbar = ReactBootstrap.ButtonToolbar;
+	var Button = ReactBootstrap.Button;
+	var Modal = ReactBootstrap.Modal;
+	var ButtonToolbar = ReactBootstrap.ButtonToolbar;
+
+	var FormGroup = ReactBootstrap.FormGroup;
+	var FormControl = ReactBootstrap.FormControl;
+	var ControlLabel = ReactBootstrap.ControlLabel;
+
+	var Calendar = React.createClass({
+	  displayName: 'Example',
+
+	  getInitialState: function getInitialState() {
+	    var excludeddates = [moment().subtract(1, 'days')];
+
+	    return {
+	      show: false,
+	      startDate: moment('2016-07-05'),
+	      endDate: moment().add(28, 'days'),
+	      excludeDates: excludeddates
+	    };
+	  },
+
+	  componentWillMount: function componentWillMount() {
+	    var exDates = [];
+	    for (var i = 1; i < 365; i++) {
+	      exDates.push(moment().subtract(parseInt([i]), 'days'));
+	    }
+	    for (var j = 29; j < 365; j++) {
+	      exDates.push(moment().add(parseInt([j]), 'days'));
+	    }
+	    //console.log(exDates)
+	    this.setState({ excludeDates: exDates });
+	  },
+
+	  update: function update() {
+	    var Q1 = ReactDOM.findDOMNode(this.refs.Qone).value;
+	    var Q2 = ReactDOM.findDOMNode(this.refs.Qtwo).value;
+	    var Q3 = ReactDOM.findDOMNode(this.refs.Qthree).value;
+	    var questionData = {
+	      Q1: Q1,
+	      Q2: Q2,
+	      Q3: Q3
+	    };
+	    console.log(questionData);
+	    this.hideModal();
+	  },
+
+	  showModal: function showModal() {
+	    this.setState({ show: true });
+	  },
+	  hideModal: function hideModal() {
+	    this.setState({ show: false });
+	  },
+
+
+	  handleChange: function handleChange(date) {
+	    var currentDate = moment().format('L');
+	    if (currentDate == moment(date).format('L')) {
+	      this.showModal();
+	    } else {
+	      alert('You can not enter information for this date');
+	    }
+	  },
+
+	  render: function render() {
+
+	    return React.createElement(
+	      'div',
+	      { className: 'calendarContainer' },
+	      React.createElement(
+	        ButtonToolbar,
+	        null,
+	        React.createElement(
+	          Modal,
+	          {
+	            show: this.state.show,
+	            onHide: this.hideModal,
+	            dialogClassName: 'custom-modal'
+	          },
+	          React.createElement(
+	            Modal.Header,
+	            { closeButton: true },
+	            React.createElement(
+	              Modal.Title,
+	              { id: 'contained-modal-title-lg' },
+	              'How Are You Feeling?'
+	            )
+	          ),
+	          React.createElement(
+	            Modal.Body,
+	            null,
+	            React.createElement(
+	              'h4',
+	              null,
+	              'Daily Assesment'
+	            ),
+	            React.createElement(
+	              'p',
+	              null,
+	              'Enter you information here:'
+	            ),
+	            React.createElement(
+	              'form',
+	              null,
+	              React.createElement(
+	                FormGroup,
+	                { controlId: 'formControlsSelect' },
+	                React.createElement(
+	                  ControlLabel,
+	                  null,
+	                  'How\'s your mood?'
+	                ),
+	                React.createElement(
+	                  FormControl,
+	                  { componentClass: 'select', placeholder: 'select', ref: 'Qone' },
+	                  React.createElement(
+	                    'option',
+	                    { value: '1' },
+	                    '1'
+	                  ),
+	                  React.createElement(
+	                    'option',
+	                    { value: '2' },
+	                    '2'
+	                  ),
+	                  React.createElement(
+	                    'option',
+	                    { value: '3' },
+	                    '3'
+	                  ),
+	                  React.createElement(
+	                    'option',
+	                    { value: '4' },
+	                    '4'
+	                  ),
+	                  React.createElement(
+	                    'option',
+	                    { value: '5' },
+	                    '5'
+	                  )
+	                ),
+	                React.createElement(
+	                  ControlLabel,
+	                  null,
+	                  'How\'s your energy level?'
+	                ),
+	                React.createElement(
+	                  FormControl,
+	                  { componentClass: 'select', placeholder: 'select', ref: 'Qtwo' },
+	                  React.createElement(
+	                    'option',
+	                    { value: '1' },
+	                    '1'
+	                  ),
+	                  React.createElement(
+	                    'option',
+	                    { value: '2' },
+	                    '2'
+	                  ),
+	                  React.createElement(
+	                    'option',
+	                    { value: '3' },
+	                    '3'
+	                  ),
+	                  React.createElement(
+	                    'option',
+	                    { value: '4' },
+	                    '4'
+	                  ),
+	                  React.createElement(
+	                    'option',
+	                    { value: '5' },
+	                    '5'
+	                  )
+	                ),
+	                React.createElement(
+	                  ControlLabel,
+	                  null,
+	                  'What is your current weight?'
+	                ),
+	                React.createElement(FormControl, { type: 'text', placeholder: 'Enter weight', ref: 'Qthree' })
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            Modal.Footer,
+	            null,
+	            React.createElement(
+	              Button,
+	              { onClick: this.update },
+	              'Submit'
+	            )
+	          )
+	        )
+	      ),
+	      React.createElement(DatePicker, {
+	        inline: true,
+	        startDate: this.state.startDate,
+	        endDate: this.state.endDate,
+	        excludeDates: this.state.excludeDates,
+	        onChange: this.handleChange })
+	    );
+	  }
+	});
+	// Export the componen back for use in other files
+	module.exports = Calendar;
+
+/***/ },
 /* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -53156,231 +53382,6 @@
 	var _ValidComponentChildren3 = _interopRequireDefault(_ValidComponentChildren2);
 
 	exports.ValidComponentChildren = _ValidComponentChildren3['default'];
-
-/***/ },
-/* 531 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	// Include React
-	var React = __webpack_require__(1);
-	var ReactDOM = __webpack_require__(158);
-
-	// Here we include all of the sub-components
-	//var Child = require('./Child');
-
-	// This is the main component. It includes the banner and button.
-	// Whenever you click the button it will communicate the click event to all other sub components.
-	var DatePicker = __webpack_require__(160);
-	var moment = __webpack_require__(161);
-	var ReactBootstrap = __webpack_require__(266);
-	//require('../../public/react-datepicker.css');
-	var ButtonToolbar = ReactBootstrap.ButtonToolbar;
-	var Button = ReactBootstrap.Button;
-	var Modal = ReactBootstrap.Modal;
-	var ButtonToolbar = ReactBootstrap.ButtonToolbar;
-
-	var FormGroup = ReactBootstrap.FormGroup;
-	var FormControl = ReactBootstrap.FormControl;
-	var ControlLabel = ReactBootstrap.ControlLabel;
-
-	var Calendar = React.createClass({
-	  displayName: 'Example',
-
-	  getInitialState: function getInitialState() {
-	    var excludeddates = [moment().subtract(1, 'days')];
-
-	    return {
-	      show: false,
-	      startDate: moment('2016-07-05'),
-	      endDate: moment().add(28, 'days'),
-	      excludeDates: excludeddates
-	    };
-	  },
-
-	  componentWillMount: function componentWillMount() {
-	    var exDates = [];
-	    for (var i = 1; i < 365; i++) {
-	      exDates.push(moment().subtract(parseInt([i]), 'days'));
-	    }
-	    for (var j = 29; j < 365; j++) {
-	      exDates.push(moment().add(parseInt([j]), 'days'));
-	    }
-	    console.log(exDates);
-	    this.setState({ excludeDates: exDates });
-	  },
-
-	  update: function update() {
-	    var Q1 = ReactDOM.findDOMNode(this.refs.Qone).value;
-	    var Q2 = ReactDOM.findDOMNode(this.refs.Qtwo).value;
-	    var Q3 = ReactDOM.findDOMNode(this.refs.Qthree).value;
-	    var questionData = {
-	      Q1: Q1,
-	      Q2: Q2,
-	      Q3: Q3
-	    };
-	    this.hideModal();
-	    //console.log(questionData);
-	  },
-
-	  showModal: function showModal() {
-	    this.setState({ show: true });
-	  },
-	  hideModal: function hideModal() {
-	    this.setState({ show: false });
-	  },
-
-
-	  handleChange: function handleChange(date) {
-	    var currentDate = moment().format('L');
-	    if (currentDate == moment(date).format('L')) {
-	      this.showModal();
-	    } else {
-	      alert('You can not enter information for this date');
-	    }
-	  },
-
-	  render: function render() {
-
-	    return React.createElement(
-	      'div',
-	      { className: 'calendarContainer' },
-	      React.createElement(
-	        ButtonToolbar,
-	        null,
-	        React.createElement(
-	          Modal,
-	          {
-	            show: this.state.show,
-	            onHide: this.hideModal,
-	            dialogClassName: 'custom-modal'
-	          },
-	          React.createElement(
-	            Modal.Header,
-	            { closeButton: true },
-	            React.createElement(
-	              Modal.Title,
-	              { id: 'contained-modal-title-lg' },
-	              'How Are You Feeling?'
-	            )
-	          ),
-	          React.createElement(
-	            Modal.Body,
-	            null,
-	            React.createElement(
-	              'h4',
-	              null,
-	              'Daily Assesment'
-	            ),
-	            React.createElement(
-	              'p',
-	              null,
-	              'Enter you information here:'
-	            ),
-	            React.createElement(
-	              'form',
-	              null,
-	              React.createElement(
-	                FormGroup,
-	                { controlId: 'formControlsSelect' },
-	                React.createElement(
-	                  ControlLabel,
-	                  null,
-	                  'How are you feeling today?'
-	                ),
-	                React.createElement(
-	                  FormControl,
-	                  { componentClass: 'select', placeholder: 'select', ref: 'Qone' },
-	                  React.createElement(
-	                    'option',
-	                    { value: '1' },
-	                    '1'
-	                  ),
-	                  React.createElement(
-	                    'option',
-	                    { value: '2' },
-	                    '2'
-	                  ),
-	                  React.createElement(
-	                    'option',
-	                    { value: '3' },
-	                    '3'
-	                  )
-	                ),
-	                React.createElement(
-	                  ControlLabel,
-	                  null,
-	                  'How is your energy level?'
-	                ),
-	                React.createElement(
-	                  FormControl,
-	                  { componentClass: 'select', placeholder: 'select', ref: 'Qtwo' },
-	                  React.createElement(
-	                    'option',
-	                    { value: '1' },
-	                    '1'
-	                  ),
-	                  React.createElement(
-	                    'option',
-	                    { value: '2' },
-	                    '2'
-	                  ),
-	                  React.createElement(
-	                    'option',
-	                    { value: '3' },
-	                    '3'
-	                  )
-	                ),
-	                React.createElement(
-	                  ControlLabel,
-	                  null,
-	                  'How is something else?'
-	                ),
-	                React.createElement(
-	                  FormControl,
-	                  { componentClass: 'select', placeholder: 'select', ref: 'Qthree' },
-	                  React.createElement(
-	                    'option',
-	                    { value: '1' },
-	                    '1'
-	                  ),
-	                  React.createElement(
-	                    'option',
-	                    { value: '2' },
-	                    '2'
-	                  ),
-	                  React.createElement(
-	                    'option',
-	                    { value: '3' },
-	                    '3'
-	                  )
-	                )
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            Modal.Footer,
-	            null,
-	            React.createElement(
-	              Button,
-	              { onClick: this.update },
-	              'Submit'
-	            )
-	          )
-	        )
-	      ),
-	      React.createElement(DatePicker, {
-	        inline: true,
-	        startDate: this.state.startDate,
-	        endDate: this.state.endDate,
-	        excludeDates: this.state.excludeDates,
-	        onChange: this.handleChange })
-	    );
-	  }
-	});
-	// Export the componen back for use in other files
-	module.exports = Calendar;
 
 /***/ }
 /******/ ]);

@@ -48,7 +48,7 @@ var Calendar = React.createClass({
     for (var j = 29; j < 365; j++){
       exDates.push(moment().add(parseInt([j]), 'days'))
     }
-    console.log(exDates)
+    //console.log(exDates)
     this.setState({excludeDates: exDates});
   },
 
@@ -63,8 +63,9 @@ var Calendar = React.createClass({
             Q2: Q2,
             Q3: Q3
         };
+        console.log(questionData);
         this.hideModal();
-        //console.log(questionData);
+        
     },
   
     showModal() {
@@ -106,25 +107,24 @@ var Calendar = React.createClass({
             <p>Enter you information here:</p>
              <form>
               <FormGroup controlId="formControlsSelect">
-                  <ControlLabel>How are you feeling today?</ControlLabel>
+                  <ControlLabel>How's your mood?</ControlLabel>
                   <FormControl componentClass="select" placeholder="select" ref="Qone">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
                   </FormControl>
-                  <ControlLabel>How is your energy level?</ControlLabel>
+                  <ControlLabel>How's your energy level?</ControlLabel>
                   <FormControl componentClass="select" placeholder="select" ref="Qtwo">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
                   </FormControl>
-                  <ControlLabel>How is something else?</ControlLabel>
-                  <FormControl componentClass="select" placeholder="select" ref="Qthree">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                  </FormControl>
-
+                  <ControlLabel>What is your current weight?</ControlLabel>
+                  <FormControl type="text" placeholder="Enter weight" ref="Qthree"/>
               </FormGroup>
               </form>
           </Modal.Body>
